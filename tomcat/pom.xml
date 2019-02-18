@@ -7,6 +7,7 @@
     <groupId>hfe-docker</groupId>
     <artifactId>tomcat</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <parent>
         <groupId>hfe-docker</groupId>
         <artifactId>docker</artifactId>
@@ -27,7 +28,34 @@
 
     <build>
         <plugins>
-
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <configuration>
+                    <repository>hfe-${project.artifactId}</repository>
+                    <buildArgs>
+                        <WAR_FILE>target/${project.build.finalName}.war</WAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <!--First Example-->
+                        <resource>
+                            <directory>/src/main/web</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
+                    <!-- finalName>${project.artifactId}-${project.version}-${svn.preffix.committedRevision}</finalName -->
+                    <!-- warName>${project.name}-${project.version}-${svn.preffix.revision}</warName-->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <attachClasses>false</attachClasses>
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

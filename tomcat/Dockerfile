@@ -1,9 +1,6 @@
-FROM tomcate:jre-slim
-VOLUME /tmp
-ARG JAR_FILE
+FROM tomcat:9-jre11-slim
 
-ENV _JAVA_OPTIONS "-Xms256m -Xmx512m -Djava.awt.headless=true"
+ARG WAR_FILE
 
-COPY ${JAR_FILE} /tmp/app.jar
+COPY ${WAR_FILE} /usr/local/tomcat/webapps
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/tmp/app.jar"]
