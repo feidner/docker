@@ -1,0 +1,9 @@
+service-a:
+  build: apache/
+  ports:
+  - '80'
+
+service-b:
+  build: tomcat/
+  links:
+  - service-a

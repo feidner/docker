@@ -1,10 +1,11 @@
 package hfe;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackageClasses = {Application.class})
 public class Application {
     public static void main(String[] args) {
-        System.out.println("hello geral, pippa und mats - juhu - jetzt fang i a");
+        SpringApplication.run(Application.class, args);
     }
 }
