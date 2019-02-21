@@ -35,10 +35,19 @@
 
     <build>
         <plugins>
-            <!--
+
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <repository>hfe-${project.artifactId}</repository>
                     <buildArgs>
@@ -46,7 +55,7 @@
                     </buildArgs>
                 </configuration>
             </plugin>
-            -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

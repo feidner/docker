@@ -14,6 +14,7 @@ RUN apt-get install links -y
 RUN a2enmod proxy
 RUN a2enmod proxy_http
 RUN a2enmod proxy_balancer
+RUN a2enmod rewrite
 
 ENV APACHE_LYNX="links -dump"
 
