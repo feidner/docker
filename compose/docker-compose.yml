@@ -6,7 +6,23 @@ services:
     image: hfe-apache
     ports:
     - "80:80"
+    networks:
+    - webproxy
 
   tomcat:
     image: hfe-tomcat
-    network_mode: service:apache
+    environment:
+      - hostname=spring
+    networks:
+    - webproxy
+    depends_on:
+      - spring
+
+  spring:
+    image: hfe-spring
+    networks:
+    - webproxy
+
+networks:
+  webproxy:
+    driver: bridge
