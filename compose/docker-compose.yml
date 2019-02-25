@@ -8,15 +8,37 @@ services:
     - "80:80"
     networks:
     - webproxy
+    environment:
+        - tomcat_1=tomcat-1
+        - tomcat_2=tomcat-2
+        - tomcat_3=tomcat-3
+        - node_1=node1
+        - node_2=node2
+        - node_3=node3
 
-  tomcat:
+  tomcat-1:
     image: hfe-tomcat
     environment:
       - hostname=spring
+      - CATALINA_OPTS=$CATALINA_OPTS -Dgreat.route=node1
     networks:
     - webproxy
-    depends_on:
-      - spring
+
+  tomcat-2:
+    image: hfe-tomcat
+    environment:
+      - hostname=spring
+      - CATALINA_OPTS=$CATALINA_OPTS -Dgreat.route=node2
+    networks:
+    - webproxy
+
+  tomcat-3:
+      image: hfe-tomcat
+      environment:
+        - hostname=spring
+        - CATALINA_OPTS=$CATALINA_OPTS -Dgreat.route=node3
+      networks:
+      - webproxy
 
   spring:
     image: hfe-spring
